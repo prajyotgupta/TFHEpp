@@ -4,8 +4,40 @@ This repository contains the stable code for the TFHE library based on [TFHEpp](
 TFHEpp is full Scracthed pure C++ Ver. of TFHE. TFHEpp is slightly(about 10%) faster than original [TFHE implementation](https://github.com/tfhe/tfhe). In addition to that, THFEpp supports Circuit Bootstrapping and [Private Boootstrapping many LUT](https://eprint.iacr.org/2021/729).
 TFHEpp depends on AVX2 because we use SPQLIOS FMA. If you want run TFHEpp without AVX2, see spqlios++ branch. It include pure C++ implementation of SPQLIOS as header only library, but slow.
 
-# Supported Compiler
+# Setup
+## Sanity Check
+Following Code is used to check sanity of the TFHEpp library, and it measures how much time homomorphic NAND takes on your machine with TFHEpp. 
+```
+git clone https://github.com/prajyotgupta/tfhepp
+cd tfhepp
+mkdir build
+cd build
+cmake .. -DENABLE_TEST=ON
+make
+./test/nand 
+```
 
+## Comparison with TFHE Original Library
+If you want to run semantically equivalent test on original TFHE, run below code.
+```
+git clone https://github.com/tfhe/tfhe.git --recursive
+cd tfhe
+mkdir build
+cd build
+cmake ../src -DENABLE_TESTS=on -DENABLE_NAYUKI_PORTABLE=off -DENABLE_NAYUKI_AVX=off -DENABLE_SPQLIOS_AVX=off -DENABLE_SPQLIOS_FMA=on -DCMAKE_BUILD_TYPE=optim
+make
+./test/test-gate-bootstrapping-spqlios-fma
+```
+
+## Docker Setup
+If you have Docker on your system, this will do above on docker.
+```
+git clone https://github.com/prajyotgupta/tfhepp
+cd tfhepp
+docker build -t tfheppbench .
+```
+
+# Supported Compiler
 This code includes utf-8 identifiers like α. Therefore, Clang and GCC10 or later are primarily supported compilers. GCC9 is not supported.
 
 # Parameter
@@ -56,56 +88,11 @@ to use this library, add `-DUSE_SPQLIOX_AARCH64=on` to the compile option.
 
 </center>
 
-# Speed Test
-
-Following Code measure how many time homomorphic NAND takes on your computer with TFHEpp. 
-```
-git clone https://github.com/virtualsecureplatform/TFHEpp
-cd TFHEpp
-mkdir build
-cd build
-cmake .. -DENABLE_TEST=ON
-make
-./test/nand 
-```
-
-If you want to run semantically equivalent test on original TFHE, run below code.
-```
-git clone https://github.com/tfhe/tfhe.git --recursive
-cd tfhe
-mkdir build
-cd build
-cmake ../src -DENABLE_TESTS=on -DENABLE_NAYUKI_PORTABLE=off -DENABLE_NAYUKI_AVX=off -DENABLE_SPQLIOS_AVX=off -DENABLE_SPQLIOS_FMA=on -DCMAKE_BUILD_TYPE=optim
-make
-./test/test-gate-bootstrapping-spqlios-fma
-```
-
-If you have Docker on your system, this will do above on docker.
-
-```
-git clone https://github.com/virtualsecureplatform/TFHEpp
-cd TFHEpp
-docker build -t tfheppbench .
-```
-
-This is for TFHE-10ms. Because TFHE-10ms only supports 80-bit security parameter, this is not included in Dockerfile
-```
-git clone https://github.com/virtualsecureplatform/tfhe-10ms.git --recursive
-cd tfhe-10ms
-mkdir build
-cd build
-cmake ../src -DENABLE_TESTS=on -DENABLE_NAYUKI_PORTABLE=off -DENABLE_NAYUKI_AVX=off -DENABLE_SPQLIOS_AVX=off -DENABLE_SPQLIOS_FMA=on -DCMAKE_BUILD_TYPE=optim
-make
-./test/test-bootstrapping-fft-spqlios-fma 
-```
-
 # Theory
-
 Here is the slides (in japanese).
 https://nindanaoto.github.io/
 
 # Citation
-
 For the people who want to cite this library directly (may be in addition to [VSP paper](https://www.usenix.org/conference/usenixsecurity21/presentation/matsuoka)), I give a below example of bibtex citation.
 
 ```
