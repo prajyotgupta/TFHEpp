@@ -186,6 +186,8 @@ int main()
 {
     RunTest<lvl1param>();
     RunTest<lvl0param>();
+#ifdef ENABLE_AXELL
     RunTest<lvlMparam>();
+#endif  // ENABLE_AXELL
     return 0;
 }

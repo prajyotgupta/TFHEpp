@@ -16,6 +16,7 @@ option(USE_HEXL "Use Intel HEXL" OFF)
 option(ENABLE_TEST "Build tests" OFF)
 option(ENABLE_BENCHMARK "Build benchmarks" OFF)
 option(ENABLE_TUTORIAL "Build tutorial" OFF)
+option(ENABLE_AXELL "Use codes developed in Axell" ON)
 
 if(USE_RANDEN)
   add_compile_definitions(USE_RANDEN)
@@ -41,6 +42,10 @@ elseif(USE_SPQLIOX_AARCH64)
   add_subdirectory(thirdparties/spqliox_aarch64)
 else()
   add_subdirectory(thirdparties/spqlios)
+endif()
+
+if(ENABLE_AXELL)
+  add_compile_definitions(ENABLE_AXELL)
 endif()
 
 if(USE_HEXL)
