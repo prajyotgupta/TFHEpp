@@ -19,7 +19,6 @@ namespace TFHEpp {
 #include "params/128bit.hpp"
 #endif
 
-#include "./axell/mpparam.hpp"
 
 struct lvl01param {
     using domainP = lvl0param;

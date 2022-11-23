@@ -1,6 +1,5 @@
 #pragma once
 
-#include "axell/gate.hpp"
 #include "cloudkey.hpp"
 
 namespace TFHEpp {
