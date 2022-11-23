@@ -1,9 +1,6 @@
 # TFHEpp
-This repository contains the stable code for the TFHE library based on [TFHEpp](https://github.com/virtualsecureplatform/TFHEpp).
+This repository contains the stable code for the TFHE library based on [TFHEpp](https://github.com/virtualsecureplatform/TFHEpp). Below is the README for TFHEpp.
 
-Below is the README for TFHEpp.
-
-# TFHEpp
 TFHEpp is full Scracthed pure C++ Ver. of TFHE. TFHEpp is slightly(about 10%) faster than original [TFHE implementation](https://github.com/tfhe/tfhe). In addition to that, THFEpp supports Circuit Bootstrapping and [Private Boootstrapping many LUT](https://eprint.iacr.org/2021/729).
 TFHEpp depends on AVX2 because we use SPQLIOS FMA. If you want run TFHEpp without AVX2, see spqlios++ branch. It include pure C++ implementation of SPQLIOS as header only library, but slow.
 
